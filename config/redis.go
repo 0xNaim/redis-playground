@@ -1,7 +1,7 @@
 package config
 
 import (
-	"context"
+	"fmt"
 	"os"
 	"strconv"
 
@@ -14,10 +14,10 @@ func InitRedis() *redis.Client {
 	// Load environment variables
 	err := godotenv.Load()
 	if err != nil {
-		panic("No .env file found, using default configuration")
+		fmt.Println("No .env file found, using default configuration")
 	}
 
-	// Get Redis configuration from environment variables or use defaults
+	// Get Redis configuration
 	addr := getEnv("REDIS_ADDR", "localhost:6379")
 	password := getEnv("REDIS_PASSWORD", "")
 	db := getEnvAsInt("REDIS_DB", 0)
@@ -29,20 +29,6 @@ func InitRedis() *redis.Client {
 		DB:       db,
 	})
 
-	// Create a context for the Redis operations
-	ctx := context.Background()
-	if ctx == nil {
-		panic("Failed to create Redis context")
-	}
-
-	// Test the connection
-	_, err = client.Ping(ctx).Result()
-	if err != nil {
-		panic("Failed to connect to Redis: " + err.Error())
-	}
-
-	// Log the successful connection
-	println("Connected to Redis at", addr)
 	return client
 }
 
