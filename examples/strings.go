@@ -93,6 +93,23 @@ func RunStringExamples(rdb *redis.Client) {
 		}
 	}
 
+	// EXISTS - Check if key exists
+	fmt.Println("\n6. Key existence:")
+	exists, err := rdb.Exists(ctx, "user:1").Result()
+	if err != nil {
+		panic("Failed to check key existence: " + err.Error())
+	}
+	fmt.Printf(" EXISTS user:1 = %d\n", exists)
+
+	// DEL - Delete keys
+	fmt.Println("\n7. Cleanup:")
+	deleted, err := rdb.Del(ctx, "user:1", "temp:session", "counter", "message").Result()
+	if err != nil {
+		panic("Failed to delete keys: " + err.Error())
+	}
+	fmt.Printf(" Deleted keys: %d\n", deleted)
+
 	// Clean up
+	fmt.Println("\n8. Cleanup all example keys:")
 	rdb.Del(ctx, "user:1", "temp:session", "counter", "message", "key1", "key2", "key3")
 }
