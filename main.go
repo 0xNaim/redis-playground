@@ -41,6 +41,10 @@ func main() {
 			examples.RunStringExamples(rdb)
 		case "2":
 			examples.RunListExamples(rdb)
+		case "3":
+			examples.RunSetsExamples(rdb)
+		case "4":
+			examples.RunHashesExamples(rdb)
 		case "0":
 			fmt.Println("Exiting Redis Playground. Goodbye!")
 			return
@@ -57,5 +61,7 @@ func showMenu() {
 	fmt.Println("\n Choose an option:")
 	fmt.Println("1. Run String Examples")
 	fmt.Println("2. Run List Examples")
+	fmt.Println("3. Run Set Examples")
+	fmt.Println("4. Run Hash Examples")
 	fmt.Println("0. Exit")
 }
