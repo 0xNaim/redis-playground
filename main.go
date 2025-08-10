@@ -47,6 +47,8 @@ func main() {
 			examples.RunSortedSetsExamples(rdb)
 		case "5":
 			examples.RunHashesExamples(rdb)
+		case "6":
+			examples.RunExpirationTTLExamples(rdb)
 		case "0":
 			fmt.Println("Exiting Redis Playground. Goodbye!")
 			return
@@ -66,5 +68,6 @@ func showMenu() {
 	fmt.Println("3. Run Set Examples")
 	fmt.Println("4. Run Sorted Set Examples")
 	fmt.Println("5. Run Hash Examples")
+	fmt.Println("6. Run Expiration & TTL Examples")
 	fmt.Println("0. Exit")
 }
